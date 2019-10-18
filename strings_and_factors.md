@@ -1,0 +1,6 @@
+Strings & Factors
+================
+Alexis
+10/18/2019
+
+
