@@ -58,6 +58,38 @@ tabl_marj =
     as_tibble()
 ```
 
+## get harry potter data
+
+```{r}
+hpsaga_html = 
+  read_html("https://www.imdb.com/list/ls000630791/")
+```
+
+```{r}
+hp_movie_names =
+  hpsaga_html %>%
+  html_nodes(".lister-item-header a") %>%
+  html_text() 
+
+hp_movie_runtime =
+  hpsaga_html %>%
+  html_nodes(".runtime") %>%
+  html_text() 
+
+hp_movie_money =
+  hpsaga_html %>%
+  html_nodes(".text-small:nth-child(7) span:nth-child(5)") %>%
+  html_text()
+
+hp_df =
+  tibble(
+    title = hp_movie_names,
+    runtime = hp_movie_runtime,
+    money = hp_movie_money
+  ) 
+```
+
+##
 
 
 
