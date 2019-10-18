@@ -119,7 +119,40 @@ reviews = tibble(
 ```
 
 
+## Use API
 
+```{r}
+nyc_water_df =
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>%
+  content()
+```
+
+```{r}
+nyc_water = 
+  GET("https://data.cityofnewyork.us/resource/waf7-5gvc.json") %>% 
+  content("text") %>%
+  jsonlite::fromJSON() %>%
+  as_tibble()
+```
+
+```{r}
+brfss_data =
+  GET("https://data.cdc.gov/api/views/waxm-p5qv/rows.csv?accessType=DOWNLOAD") %>%
+content("parsed")
+```
+
+### when you are dealing with websites that periodically update, using APIs are useful
+
+  
+```{r}
+poke = 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+
+poke$name
+poke$abilities
+```
+  
 
 
 
