@@ -3,6 +3,8 @@ title: "Reading Data from the Web"
 author: "Alexis"
 date: "10/10/2019"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -28,5 +30,45 @@ scale_fill_discrete = scale_fill_viridis_d
 
 theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
+
+## Get some data
+
+read in the NSDUH data
+
+```{r}
+url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+
+drug_use_xml = read_html(url)
+
+drug_use_xml
+
+drug_use_xml %>%
+  html_nodes(css  = "table")
+
+table_list =
+  drug_use_xml %>% html_nodes(css = "table")  
+  table_list[[1]] %>%
+    html_table()
+ 
+tabl_marj =
+  drug_use_xml %>% html_nodes(css = "table")  
+  table_list[[1]] %>%
+    html_table() %>%
+    slice(-1) %>%
+    as_tibble()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
